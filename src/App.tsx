@@ -13,7 +13,7 @@ function App() {
           <li
             className={`${
               tab === "search" ? "border-b" : "hover:border-b"
-            } text-xl border-[#4880EE] cursor-pointer`}
+            } text-xl border-palettePrimary cursor-pointer`}
             onClick={() => setTab("search")}
           >
             도서 검색
@@ -21,7 +21,7 @@ function App() {
           <li
             className={`${
               tab === "like" ? "border-b" : "hover:border-b"
-            } text-xl border-[#4880EE] cursor-pointer`}
+            } text-xl border-palettePrimary cursor-pointer`}
             onClick={() => setTab("like")}
           >
             내가 찜한 책
