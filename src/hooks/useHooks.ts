@@ -1,5 +1,7 @@
 import { searchBooks } from "../api/search";
 import { searchHistoryApi } from "../api/history";
+import { likeBookApi } from "../api/like";
+import type { BooksData } from "../types/Books";
 import {
   useInfiniteQuery,
   useMutation,
@@ -61,5 +63,51 @@ export const useHistory = () => {
     history,
     setHistory: setSearchHistory.mutate,
     deleteHistory: deleteHistory.mutate,
+  };
+};
+
+export const useLike = () => {
+  const queryClient = useQueryClient();
+
+  const { data: allLikeBooks = [] } = useQuery<BooksData[]>({
+    queryKey: ["allLikeBooks"],
+    queryFn: likeBookApi.getLikes,
+  });
+
+  const likeBooks = useInfiniteQuery({
+    queryKey: ["likeBooks"],
+    queryFn: ({ pageParam = 1 }) => likeBookApi.getLikesPagination(pageParam),
+    getNextPageParam: (lastPage, allPages) => {
+      const isEnd = lastPage.meta.is_end;
+      if (isEnd) return undefined;
+
+      return allPages.length + 1;
+    },
+    retry: false,
+    enabled: true,
+    initialPageParam: 1,
+  });
+
+  const toggleLike = useMutation({
+    mutationFn: likeBookApi.toggleLike,
+    onSuccess: (newLike: BooksData[]) => {
+      queryClient.setQueryData(["allLikeBooks"], newLike);
+      queryClient.refetchQueries({ queryKey: ["likeBooks"] });
+    },
+  });
+
+  const isLikes = (book: BooksData) => {
+    return allLikeBooks.some(
+      (item) =>
+        item.isbn === book.isbn &&
+        item.title === book.title &&
+        item.datetime === book.datetime
+    );
+  };
+
+  return {
+    likeBooks,
+    toggleLike: toggleLike.mutate,
+    isLikes,
   };
 };

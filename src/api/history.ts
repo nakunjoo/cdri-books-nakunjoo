@@ -3,7 +3,7 @@ export const searchHistoryApi = {
     const history = localStorage.getItem("searchHistory");
     return history ? JSON.parse(history) : [];
   },
-  setHistory: (search: string) => {
+  setHistory: (search: string): Promise<string[]> => {
     const history = searchHistoryApi.getHistory();
     const historyIndex = history.indexOf(search);
     if (historyIndex > -1) {
