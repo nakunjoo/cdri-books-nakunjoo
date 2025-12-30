@@ -117,7 +117,12 @@ function Book({ book, detail, index, setSelectIndex }: PropsData) {
           type="button"
           className="flex justify-start items-center px-[18px] py-3 gap-1 bg-paletteLG text-secondary"
         >
-          상세보기 <img src="arrow.png" alt="arrow" />
+          상세보기{" "}
+          <img
+            className={`${detail ? "rotate-0" : "rotate-180"} transition-all`}
+            src="arrow.png"
+            alt="arrow"
+          />
         </button>
         {detail && (
           <div className="flex flex-col gap-7">

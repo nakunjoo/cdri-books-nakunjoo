@@ -181,7 +181,13 @@ function SearchForm({
                   <span className="text-sm font-bold">
                     {targetName(target)}
                   </span>
-                  <img src="arrow-detail.png" alt="arrow-detail" />
+                  <img
+                    className={`${
+                      isTarget ? "rotate-180" : "rotate-0"
+                    } transition-all`}
+                    src="arrow-detail.png"
+                    alt="arrow-detail"
+                  />
                   {isTarget && (
                     <div className="absolute top-[calc(100%+6px)] left-0  w-full bg-white shadow-[0px_0px_4px_0px_#00000040]">
                       {filterTarget.map((val, index) => {
