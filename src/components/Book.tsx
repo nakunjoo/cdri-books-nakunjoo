@@ -126,27 +126,31 @@ function Book({ book, detail, index, setSelectIndex }: PropsData) {
         </button>
         {detail && (
           <div className="flex flex-col gap-7">
-            <div className="inline-grid grid-cols-[auto_auto] gap-x-2 gap-y-1 items-center">
-              <span className="text-[10px] text-subTitle justify-self-end">
-                원가
-              </span>
-              <span
-                className={`${
-                  book.sale_price > 0 ? "line-through font-light" : "font-bold"
-                } text-lg text-right whitespace-nowrap`}
-              >
-                {book.price.toLocaleString()}원
-              </span>
-              {book.sale_price > 0 && (
-                <>
-                  <span className="text-[10px] text-subTitle justify-self-end">
-                    할인가
-                  </span>
-                  <span className="text-lg font-bold text-right whitespace-nowrap">
-                    {book.sale_price.toLocaleString()}원
-                  </span>
-                </>
-              )}
+            <div className="flex justify-end items-center">
+              <div className="inline-grid grid-cols-[auto_auto] gap-x-2 gap-y-1 items-center">
+                <span className="text-[10px] text-subTitle justify-self-end">
+                  원가
+                </span>
+                <span
+                  className={`${
+                    book.sale_price > 0
+                      ? "line-through font-light"
+                      : "font-bold"
+                  } text-lg text-right whitespace-nowrap`}
+                >
+                  {book.price.toLocaleString()}원
+                </span>
+                {book.sale_price > 0 && (
+                  <>
+                    <span className="text-[10px] text-subTitle justify-self-end">
+                      할인가
+                    </span>
+                    <span className="text-lg font-bold text-right whitespace-nowrap">
+                      {book.sale_price.toLocaleString()}원
+                    </span>
+                  </>
+                )}
+              </div>
             </div>
             <a
               href={book.url}

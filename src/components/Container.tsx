@@ -69,7 +69,7 @@ function Container() {
   return (
     <section>
       <div className="flex flex-col items-start justify-start gap-4 mb-6">
-        <h2 className="text-title text-[22px]">
+        <h2 className="text-title text-[22px] font-bold">
           {tab === "search" ? "도서 검색" : "내가 찜한 책"}
         </h2>
       </div>
