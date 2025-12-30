@@ -12,7 +12,7 @@ interface PropsData {
 function BookList({ bookList, meta, searchValue }: PropsData) {
   const { tab } = useTab();
   const [selectIndex, setSelectIndex] = useState<number | null>(null);
-  const [prevSearch, setPrevSearch] = useState(searchValue);
+  const [prevSearch, setPrevSearch] = useState<string | undefined>(searchValue);
 
   if (prevSearch !== searchValue) {
     setPrevSearch(searchValue);

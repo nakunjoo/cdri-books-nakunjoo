@@ -18,26 +18,17 @@ function SearchForm({
   setIsDetail,
   setTargetValue,
 }: PropsData) {
-  const initialSearch = useMemo(
-    () => (isDetail ? "" : searchValue),
-    [isDetail, searchValue]
-  );
-
-  const initialDetailSearch = useMemo(
-    () => (isDetail ? searchValue : ""),
-    [isDetail, searchValue]
-  );
-  const initialTarget = useMemo(
-    () => (isDetail ? targetValue : "title"),
-    [isDetail, targetValue]
-  );
   const { history, setHistory, deleteHistory } = useHistory();
-  const [search, setSearch] = useState<string>(initialSearch);
+  const [search, setSearch] = useState<string>(isDetail ? "" : searchValue);
   const [isDetailOpen, setIsDetailOpen] = useState<boolean>(false);
   const [isTarget, setIsTarget] = useState<boolean>(false);
-  const [detailSearch, setDetailSearch] = useState<string>(initialDetailSearch);
+  const [detailSearch, setDetailSearch] = useState<string>(
+    isDetail ? searchValue : ""
+  );
   const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [target, setTarget] = useState<string>(initialTarget);
+  const [target, setTarget] = useState<string>(
+    isDetail ? targetValue : "title"
+  );
 
   const searchRef = useRef<HTMLInputElement>(null);
 
